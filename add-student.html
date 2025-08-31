@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management System | University of Bedfordshire</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('Images/slide1.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .navbar {
+      background-color: #0044cc;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-nav .nav-link {
+      color: white !important;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #ffcc00 !important;
+    }
+
+    .logo img {
+      max-height: 100px;
+      width: auto;
+      cursor: pointer;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .btn-primary {
+    
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 30px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0033aa;
+    }
+
+    .footer {
+      background-color: #003366;
+      color: #fff;
+      padding: 30px 0;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer a:hover {
+      color: #ffcc00;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+
+    .is-valid {
+      border-color: #28a745 !important;
+    }
+
+    .is-invalid {
+      border-color: #dc3545 !important;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+  
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <div class="logo">
+        <a href="Home.html">
+          <img src="Images/logo1.png" alt="University Logo">
+        </a>
+      </div>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="Home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="add-student.html">Add Student</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="view.html">View Students</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="update-student.html">Update Student</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="search_delete.html">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="delete.html">Delete</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h1 class="text-center"><b>Student Record Management System</b></h1>
+    
+ 
+    <div class="card p-3 mt-4">
+      <h4>Add Student</h4>
+      <form id="addStudentForm">
+        <input type="number" id="sid" class="form-control mb-2" placeholder="Student ID" required>
+        <input type="text" id="firstName" class="form-control mb-2" placeholder="First Name" required>
+        <input type="text" id="lastName" class="form-control mb-2" placeholder="Last Name" required>
+        <input type="email" id="email" class="form-control mb-2" placeholder="Email" required>
+        <input type="text" id="nearCity" class="form-control mb-2" placeholder="Near City" required>
+        <input type="text" id="guardian" class="form-control mb-2" placeholder="Guardian" required>
+        
+      
+        <select id="course" class="form-control mb-2" required>
+          <option value="" disabled selected>Select Course</option>
+          <option value="Foundation">Foundation</option>
+          <option value="HND">HND</option>
+          <option value="Degree">Degree</option>
+        </select>
+        
+       
+        <div id="subjectsContainer" class="form-group">
+          <div class="d-flex mb-2">
+            <input type="text" class="form-control" placeholder="Enter Subject" name="subject" required>
+            <button type="button" class="btn btn-success ml-2 addSubject">+</button>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Add Student</button>
+      </form>
+    </div>
+  </div>
+  <br>
+  
+ 
+  <div class="footer">
+    <div class="container">
+      <p>&copy; 2024 University of Bedfordshire | <a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></p>
+    </div>
+  </div>
+
+ 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <script>
+    const API_URL = "http://localhost:3000/students";
+
+   
+    $(document).on("click", ".addSubject", function () {
+      const subjectInput = `
+        <div class="d-flex mb-2">
+          <input type="text" class="form-control" placeholder="Enter Subject" name="subject" required>
+          <button type="button" class="btn btn-danger ml-2 removeSubject">-</button>
+        </div>`;
+      $("#subjectsContainer").append(subjectInput);
+    });
+
+   
+    $(document).on("click", ".removeSubject", function () {
+      $(this).closest(".d-flex").remove();
+    });
+
+   
+    $("#addStudentForm").submit(function (e) {
+      e.preventDefault();
+
+      const sid = $("#sid").val();
+      const firstName = $("#firstName").val();
+      const lastName = $("#lastName").val();
+      const email = $("#email").val();
+      const nearCity = $("#nearCity").val();
+      const guardian = $("#guardian").val();
+      const course = $("#course").val();
+      const subjects = $("input[name='subject']").map(function () {
+        return $(this).val();
+      }).get();
+
+      const student = {  
+        SID: sid,
+        FirstName: firstName,
+        LastName: lastName,
+        Email: email,
+        NearCity: nearCity,
+        Guardian: guardian,
+        Course: course,
+        Subjects: subjects,
+      };
+
+      $.ajax({
+        url: API_URL,
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(student),
+        success: function () {
+          alert("Student added successfully!");
+          $("#addStudentForm")[0].reset();
+          $("#subjectsContainer .d-flex:not(:first-child)").remove();
+          
+          $("#addStudentForm input, #addStudentForm select").removeClass("is-valid is-invalid");
+        },
+        error: function (error) {
+          alert("Error adding student: " + error.responseJSON.message);
+          console.error(error.responseJSON); 
+        }
+      });
+    });
+
+ 
+    $(document).ready(function () {
+    
+      $("#email").on("input", function () {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test($(this).val())) {
+          $(this).addClass("is-invalid").removeClass("is-valid");
+        } else {
+          $(this).addClass("is-valid").removeClass("is-invalid");
+        }
+      });
+
+      
+      $("#course").on("change", function () {
+        if ($(this).val() === "") {
+          $(this).addClass("is-invalid").removeClass("is-valid");
+        } else {
+          $(this).addClass("is-valid").removeClass("is-invalid");
+        }
+      });
+
+    
+      $("input[required]").on("input", function () {
+        if ($(this).val().trim() === "") {
+          $(this).addClass("is-invalid").removeClass("is-valid");
+        } else {
+          $(this).addClass("is-valid").removeClass("is-invalid");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management System | University of Bedfordshire</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      
+    }
+
+    .navbar {
+      background-color: #0044cc;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+
+
+    .navbar-nav .nav-link {
+      color: white !important;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #ffcc00 !important;
+    }
+
+    .logo img {
+      max-height: 100px;
+      width: auto;
+      cursor: pointer;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    
+    @media (max-width: 576px) {
+      .logo img {
+        max-height: 40px;
+      }
+    }
+
+   
+    .hero-section {
+      background: linear-gradient(to right, #0066cc, #003366);
+      color: #fff;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    .hero-section h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .btn-primary {
+ 
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 30px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0033aa;
+    }
+
+  
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+
+    .card-text {
+      color: #555;
+      display: none;
+    }
+
+    
+    .services-section {
+      background: url('Images/slide12.jpg') no-repeat center center/cover;
+      padding: 60px 0;
+    }
+
+    .services-section h2 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #fff;
+    }
+
+   
+    .footer {
+      background-color: #003366;
+      color: #fff;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer a:hover {
+      color: #ffcc00;
+    }
+
+
+  </style>
+</head>
+<body>
+
+ 
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <div class="logo">
+        <a href="Home.html">
+          <img src="Images/logo1.png" alt="University Logo">
+        </a>
+      </div>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="Home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="add-student.html">Add Student</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="view.html">View Students</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="update-student.html">Update Student</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="search_delete.html">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="delete.html">Delete</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+ 
+  <div class="hero-section">
+    <div class="container">
+      <h1>Welcome to the University of Bedfordshire</h1>
+      <p>Empowering Students with Knowledge and Innovation</p>
+      <a href="add-student.html" class="btn btn-primary">Add Student</a>
+      <a href="view.html" class="btn btn-primary ml-3">View All Students</a>
+    </div>
+  </div>
+
+  <div class="services-section">
+    <div class="container">
+      <h2>Our Services</h2>
+      <div class="row justify-content-center">
+        
+        <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
+          <div class="card">
+            <img src="Images/1.jpg" alt="Add Student">
+            <div class="card-body">
+              <h5 class="card-title">Add Student</h5>
+              <p class="card-text">Easily add new student records to the system with detailed information.</p>
+              <a href="add-student.html" class="btn btn-primary">Learn More</a>
+            </div>
+          </div>
+        </div>
+  
+       
+        <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
+          <div class="card">
+            <img src="Images/2.jpg" alt="Update Student">
+            <div class="card-body">
+              <h5 class="card-title">Update Student</h5>
+              <p class="card-text">Update student details based on SID for accurate records.</p>
+              <a href="update-student.html" class="btn btn-primary">Learn More</a>
+            </div>
+          </div>
+        </div>
+  
+     
+        <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
+          <div class="card">
+            <img src="Images/3.jpg" alt="View Students">
+            <div class="card-body">
+              <h5 class="card-title">View Students</h5>
+              <p class="card-text">View and manage list of all student records in the system.</p>
+              <a href="view.html" class="btn btn-primary">Learn More</a>
+            </div>
+          </div>
+        </div>
+  
+       
+        <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
+          <div class="card">
+            <img src="Images/4.jpg" alt="Search Students">
+            <div class="card-body">
+              <h5 class="card-title">Search</h5>
+              <p class="card-text">Search student records in the system.</p>
+              <a href="search_delete.html" class="btn btn-primary">Learn More</a>
+            </div>
+          </div>
+        </div>
+  
+     
+        <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
+          <div class="card">
+            <img src="Images/3.jpg" alt="Delete">
+            <div class="card-body">
+              <h5 class="card-title">Delete</h5>
+              <p class="card-text">Delete student records in the system.</p>
+              <a href="delete.html" class="btn btn-primary">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+ 
+  <div class="footer">
+    <p>&copy; 2024 University of Bedfordshire | <a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></p>
+  </div>
+
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+
+     
+      $.ajax({
+        url: "http://localhost:3000/students", 
+        method: "GET",
+        success: function(data) {
+          console.log("Data received:", data);
+          
+        },
+        error: function(error) {
+          console.error("Error fetching students:", error);
+        }
+      });
+
+      
+      $(".card").hover(
+        function() {
+        
+          $(this).find(".card-text").fadeIn();
+        },
+        function() {
+          
+          $(this).find(".card-text").fadeOut();
+        }
+      );
+
+      
+      $(".card-text").hide();
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management System | University of Bedfordshire</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <style>
+
+    body,html {
+  flex: 1;
+  font-family: 'Poppins', sans-serif;
+  background-image: url('Images/slide1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+}
+
+
+    .navbar {
+      background-color: #0044cc;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .navbar-nav .nav-link {
+      color: white !important;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #ffcc00 !important;
+    }
+    .logo img {
+      max-height: 100px;
+      width: auto;
+      cursor: pointer;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+    }
+    .btn-primary {
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 30px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0033aa;
+    }
+
+   
+    .footer {
+      background-color: #003366;
+      color: #fff;
+      padding: 30px 0;
+      text-align: center;
+      font-size: 1rem;
+      position: relative;
+      margin-top: auto;
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer a:hover {
+      color: #ffcc00;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <div class="logo">
+        <a href="Home.html">
+          <img src="Images/logo1.png" alt="University Logo">
+        </a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="Home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="add-student.html">Add Student</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="view.html">View Students</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="update-student.html">Update Student</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="search_delete.html">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="delete.html">Delete</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h1 class="text-center"><b>Update Student Details</b></h1>
+
+    <div class="card p-3 mt-4">
+      <h4>Search for Student</h4>
+      <form id="searchStudentForm">
+        <div class="form-group">
+          <label for="searchCriteria">Search by</label>
+          <select id="searchCriteria" class="form-control mb-2" required>
+            <option value="SID">Student ID</option>
+            <option value="FirstName">First Name</option>
+          </select>
+        </div>
+        <input type="text" id="searchValue" class="form-control mb-2" placeholder="Enter SID or First Name" required>
+        <button type="submit" class="btn btn-primary">Search Student</button>
+      </form>
+    </div>
+
+    <div class="card p-3 mt-4" id="updateFormCard" style="display: none;">
+      <h4>Update Student</h4>
+      <form id="updateStudentForm">
+        <input type="number" id="sid" class="form-control mb-2" placeholder="Student ID" readonly>
+        <input type="text" id="firstName" class="form-control mb-2" placeholder="First Name" required>
+        <input type="text" id="lastName" class="form-control mb-2" placeholder="Last Name" required>
+        <input type="email" id="email" class="form-control mb-2" placeholder="Email" required>
+        <input type="text" id="nearCity" class="form-control mb-2" placeholder="Near City" required>
+        <input type="text" id="guardian" class="form-control mb-2" placeholder="Guardian" required>
+
+
+        <select id="course" class="form-control mb-2" required>
+          <option value="" disabled>Select Course</option>
+          <option value="Foundation">Foundation</option>
+          <option value="HND">HND</option>
+          <option value="Degree">Degree</option>
+        </select>
+        
+
+        <div id="subjectsContainer" class="form-group">
+          <div class="d-flex mb-2">
+            <input type="text" class="form-control" placeholder="Enter Subject" name="subject" required>
+            <button type="button" class="btn btn-success ml-2" id="addSubjectButton">+</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Student</button>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="footer">
+    <div class="container">
+      <p>&copy; 2024 University of Bedfordshire | <a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></p>
+    </div>
+  </div>
+  
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <script>
+    const API_URL = "http://localhost:3000/students";
+
+
+    $("#addSubjectButton").click(function() {
+      const subjectsContainer = $("#subjectsContainer");
+      const newSubjectDiv = `
+        <div class="d-flex mb-2">
+          <input type="text" class="form-control" placeholder="Enter Subject" name="subject" required>
+          <button type="button" class="btn btn-danger ml-2 removeSubjectButton">-</button>
+        </div>
+      `;
+      subjectsContainer.append(newSubjectDiv);
+    });
+
+ 
+    $(document).on("click", ".removeSubjectButton", function() {
+      $(this).parent().remove();
+    });
+    
+
+    $("#searchStudentForm").submit(function(e) {
+      e.preventDefault();
+
+      const searchCriteria = $("#searchCriteria").val();
+      const searchValue = $("#searchValue").val();
+
+      $.ajax({
+        url: `${API_URL}?${searchCriteria}=${searchValue}`,
+        type: "GET",
+        success: function(data) {
+          if (data.length > 0) {
+            const student = data[0]; 
+            populateUpdateForm(student);
+            $("#updateFormCard").show();
+          } else {
+            alert("Student not found.");
+          }
+        },
+        error: function(error) {
+          alert("Error searching student: " + error.responseJSON.message);
+        }
+      });
+    });
+
+
+    function populateUpdateForm(student) {
+      $("#sid").val(student.SID);
+      $("#firstName").val(student.FirstName);
+      $("#lastName").val(student.LastName);
+      $("#email").val(student.Email);
+      $("#nearCity").val(student.NearCity);
+      $("#guardian").val(student.Guardian);
+      $("#course").val(student.Course);
+
+      const subjectsContainer = $("#subjectsContainer");
+      subjectsContainer.empty();
+      student.Subjects.forEach(subject => {
+        subjectsContainer.append(`
+          <div class="d-flex mb-2">
+            <input type="text" class="form-control" value="${subject}" name="subject" required>
+            <button type="button" class="btn btn-danger ml-2 removeSubjectButton">-</button>
+          </div>
+        `);
+      });
+    }
+
+
+    $("#updateStudentForm").submit(function(e) {
+      e.preventDefault();
+
+      const sid = $("#sid").val();
+      const firstName = $("#firstName").val();
+      const lastName = $("#lastName").val();
+      const email = $("#email").val();
+      const nearCity = $("#nearCity").val();
+      const guardian = $("#guardian").val();
+      const course = $("#course").val();
+      const subjects = $("input[name='subject']").map(function() { return $(this).val(); }).get();
+
+      const updatedStudent = {
+        SID: sid,
+        FirstName: firstName,
+        LastName: lastName,
+        Email: email,
+        NearCity: nearCity,
+        Guardian: guardian,
+        Course: course,
+        Subjects: subjects,
+      };
+
+      $.ajax({
+        url: `${API_URL}/${sid}`,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(updatedStudent),
+        success: function() {
+          alert("Student updated successfully!");
+          $("#updateStudentForm")[0].reset();
+          $("#updateFormCard").hide();
+        },
+        error: function(error) {
+          alert("Error updating student: " + error.responseJSON.message);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

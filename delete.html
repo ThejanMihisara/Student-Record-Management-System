@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management System | University of Bedfordshire</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <style>
+  body {
+  flex: 1;
+  font-family: 'Poppins', sans-serif;
+  background-image: url('Images/slide1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+}
+
+   
+    .navbar {
+      background-color: #0044cc;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+
+
+    .navbar-nav .nav-link {
+      color: white !important;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #ffcc00 !important;
+    }
+
+    .logo img {
+      max-height: 100px;
+      width: auto;
+      cursor: pointer;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .btn-primary {
+      
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 30px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0033aa;
+    }
+
+    
+    .footer {
+      background-color: #003366;
+      color: #fff;
+      padding: 30px 0;
+      text-align: center;
+      font-size: 1rem;
+      top: 420px;
+      position: relative;
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .footer a:hover {
+      color: #ffcc00;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+    .delete-student-container {
+     
+    max-width: 1100px; 
+    margin: 0 auto;
+    padding: 20px; 
+    top: 200px;
+    position: relative;
+    background-color: #fff; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }
+  </style>
+</head>
+<body>
+
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <div class="logo">
+        <a href="Home.html">
+          <img src="Images/logo1.png" alt="University Logo">
+        </a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="Home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="add-student.html">Add Student</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="view.html">View Students</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="update-student.html">Update Student</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="search_delete.html">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="delete.html">Delete</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+   
+        <div class="delete-student-container">
+        <h3 class="card-title">Delete Student</h3>
+        <div class="row g-3">
+         
+          <div class="col-md-9">
+            <input type="number" id="deleteSID" class="form-control" placeholder="Enter Student ID to delete">
+          </div>
+         
+          <div class="col-md-3">
+            <button class="btn btn-danger w-100" id="deleteBtn">Delete</button>
+          </div>
+        </div>
+      </div>
+   
+
+
+
+
+  <div class="footer">
+    <div class="container">
+      <p>&copy; 2024 University of Bedfordshire | <a href="#">Privacy Policy</a> | <a href="#">Contact Us</a></p>
+    </div>
+  </div>
+  
+ 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+ 
+  <script>
+    const apiUrl = "http://localhost:3000/students";
+
+   
+    $('#searchBtn').click(function() {
+      const field = $('#searchField').val();
+      let value = $('#searchValue').val();
+
+      if (!value) {
+        alert("Please enter a search value!");
+        return;
+      }
+
+    
+      if (field === "SID") {
+        value = parseInt(value, 10);
+        if (isNaN(value)) {
+          alert("Student ID must be a valid number!");
+          return;
+        }
+      }
+
+      $.ajax({
+        url: `${apiUrl}?${field}=${encodeURIComponent(value)}`,
+        method: "GET",
+        success: function(students) {
+          const outputBody = $('#outputBody');
+          outputBody.empty();
+
+          if (students.length === 0) {
+            outputBody.append('<tr><td colspan="8" class="text-center">No records found</td></tr>');
+            return;
+          }
+
+          students.forEach(student => {
+            const row = `
+              <tr>
+                <td>${student.SID}</td>
+                <td>${student.FirstName}</td>
+                <td>${student.LastName}</td>
+                <td>${student.Email}</td>
+                <td>${student.NearCity}</td>
+                <td>${student.Guardian}</td>
+                <td>${student.Course}</td>
+                <td>${student.Subjects ? student.Subjects.join(", ") : "N/A"}</td>
+              </tr>
+            `;
+            outputBody.append(row);
+          });
+        },
+        error: function() {
+          alert("Error fetching student records!");
+        }
+      });
+    });
+
+ 
+    $('#deleteBtn').click(function() {
+      const sid = $('#deleteSID').val();
+
+      if (!sid) {
+        alert("Please enter a valid Student ID!");
+        return;
+      }
+
+      $.ajax({
+        url: `${apiUrl}/${sid}`,
+        method: "DELETE",
+        success: function(result) {
+          if (result.message) {
+            alert(result.message);
+            $('#searchBtn').click(); 
+          } else {
+            alert("Error deleting the student!");
+          }
+        },
+        error: function() {
+          alert("Error deleting the student!");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
